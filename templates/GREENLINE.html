@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>IstheMBTADown</title>
+      <!-- 
+         Test page for IT428
+         Filename: about.html
+
+         Author:  GROUP 2 
+         Date:     2/6/24
+         LAST EDITED: 3/5/22
+      -->
+      
+     
+     
+      <!--THIS HTML page is for the about page-->
+      
+      
+      
+            
+      <meta charset="utf-8">
+     
+  <!--HEAD CONTENT -->
+   <meta charset="UTF-8">
+   <title>IstheMBTADown?</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+ <link rel="stylesheet" href="/static/style.css">
+ </head>
+
+   <!--Navigation Page-->
+   <input id="page-nav-toggle" class="main-navigation-toggle" type="checkbox" />
+   <label for="page-nav-toggle">
+     <svg class="icon--menu-toggle" viewBox="0 0 60 30">
+       <g class="icon-group">
+         <g class="icon--menu">
+           <path d="M 6 0 L 54 0" />
+           <path d="M 6 15 L 54 15" />
+           <path d="M 6 30 L 54 30" />
+         </g>
+         <g class="icon--close">
+           <path d="M 15 0 L 45 30" />
+           <path d="M 15 30 L 45 0" />
+         </g>
+       </g>
+     </svg>
+   </label>
+   
+   <nav class="main-navigation">
+     <ul>
+      <li><a href="{{ url_for('home')}}">Homepage</a></li>
+      <li><a href="{{ url_for('lines')}}">Lines</a></li>
+      <li><a href="{{ url_for('login')}}">Profile</a></li>
+      <li><a href="{{ url_for('contact')}}">Contact</a></li>
+      <li><a href="{{ url_for('about')}}">About</a></li>
+     </ul>
+   </nav>
+   
+   
+<!--HEADER CONTENT-->
+     <!--Body-->
+      <body>
+         <div class="header-nav-container">
+            <header>
+               <div>
+                <a href="{{ url_for('home')}}"><img src="{{ url_for('static', filename='images/image.png') }}" alt="MBTA DOWN logo with Title that says MBTA DOWN" width="540" height="240" ></a>       
+               </div>
+            </header>
+            
+<!--MAIN CONTENT-->
+           
+<nav class="sitenavigation">
+  <ul>
+    <h1>Welcome to the Greenline</h1>
+    <h3>Please scroll down to search for your Station!</h3>
+    <h1>Welcome to Greenline!</h1>
+    <h2>Choose a destination to see a branch or scroll to find your station!</h2>
+    <h8><a href="#Medford/Tufts" class="greenline"> Medford/tufts  :</a></h3>
+    <h8><a href="#Boston College"class="greenline"> Boston College  :</a></h3>
+    <h8><a href="#Cleveland Circle"class="greenline"> Cleveland Circle  :</a></h3>
+    <h8><a href="#Riverside"class="greenline"> Riverside  :</a></h3>
+    <h8><a href="#HeathSt"class="greenline"> Heath St.  :</a></h3>
+
+
+    
+    <!--NORTH/EAST SIDE-->
+    <h5>Medford/Tufts:<span id="Medford/Tufts"></span></h5><br>
+    <h8><a href="#Bottom"class="greenline"><h8>Bottom</h8></a></h8><br><br>
+    <h7>Medford/Tufts</h7>
+    <div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+     <div>Boston College:6 min </div>
+     <div>Cleveland Circle: 5 min</div>
+     <div>Riverside: 4 min</div>
+     <div>Heath St: 2 min</div>
+     <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+   </div>
+   <p></p>
+  
+   <h7>Ball Square</h7>
+   <div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+    <div>Meford/tufts: 1 min</div>
+    <div>Boston College:6 min </div>
+    <div>Cleveland Circle: 5 min</div>
+    <div>Riverside: 4 min</div>
+    <div>Heath St: 2 min</div>
+    <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+  </div>
+  <p></p>
+  <h7>Magoun Square</h7>
+ 
+  <div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+   <div>Meford/tufts: 1 min</div>
+   <div>Boston College:6 min </div>
+   <div>Cleveland Circle: 5 min</div>
+   <div>Riverside: 4 min</div>
+   <div>Heath St: 2 min</div>
+    <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+ </div>
+ <p></p>
+
+ <h7>Gilman Square</h7>
+ <div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+  <div>Meford/tufts: 1 min</div>
+  <div>Boston College:6 min </div>
+  <div>Cleveland Circle: 5 min</div>
+  <div>Riverside: 4 min</div>
+  <div>Heath St: 2 min</div>
+  <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+</div>
+<p></p>
+
+<h7>East Somerville</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+ <div>Meford/tufts: 1 min</div>
+ <div>Boston College:6 min </div>
+ <div>Cleveland Circle: 5 min</div>
+ <div>Riverside: 4 min</div>
+ <div>Heath St: 2 min</div>
+ <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+</div>
+<p></p>
+
+<h7>Union Square</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+ <div>Meford/tufts: 1 min</div>
+<div>Boston College:6 min </div>
+<div>Cleveland Circle: 5 min</div>
+<div>Riverside: 4 min</div>
+<div>Heath St: 2 min</div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+</div>
+<p></p>
+
+<h7>Lechmere</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min </div>
+<div>Cleveland Circle: 5 min</div>
+<div>Riverside: 4 min</div><br>
+<div>Heath St: 2 min</div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div> </div>
+
+<h7>Science Park/West End</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min </div>
+<div>Cleveland Circle: 5 min</div>
+<div>Riverside: 4 min</div><br>
+<div>Heath St: 2 min</div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div> </div>
+
+<h7>North Station</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min </div>
+<div>Cleveland Circle: 5 min</div>
+<div>Riverside: 4 min</div><br>
+<div>Heath St: 2 min</div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div></div>
+
+<h7>Hay Market</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min </div>
+<div>Cleveland Circle: 5 min</div>
+<div>Riverside: 4 min</div><br>
+<div>Heath St: 2 min</div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+<h7>Gov. Center</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min </div>
+<div>Cleveland Circle: 5 min</div>
+<div>Riverside: 4 min</div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Park St.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min </div>
+<div>Cleveland Circle: 5 min</div>
+<div>Riverside: 4 min</div>
+<div>Heath St: 2 min</div>
+<div><a href="REDLINE.html"class=redline>Red line</a></div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+
+
+<h7>Boylston</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min </div>
+<div>Cleveland Circle: 5 min</div>
+<div>Riverside: 4 min</div>
+<div>Heath St: 2 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Arlington</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min </div>
+<div>Cleveland Circle: 5 min</div>
+<div>Riverside: 4 min</div>
+<div>Heath St: 2 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+<h7>Copley</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min </div>
+<div>Cleveland Circle: 5 min</div>
+<div>Riverside: 4 min</div>
+<div>Heath St: 2 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Hynes Convention Center</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min </div>
+<div>Cleveland Circle: 5 min</div>
+<div>Riverside: 4 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Kenmore</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min </div>
+<div>Cleveland Circle: 5 min</div>
+<div>Riverside: 4 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+<p>  </p><br>
+
+<!--Boston College B-->
+<h5>Boston College:<span id="Boston College"></span></h5><br>
+<p>  </p><br>
+<h7>Blandford St.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min  </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>BU east</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min  </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>BU Central</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min  </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Amory St.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min  </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Babcock St.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min  </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Packard's Corner</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min  </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Harvard Ave.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min  </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Griggs St.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min  </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Allston St.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min  </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Warren St.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min  </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Washington St.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min  </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Sutherland Rd.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min  </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Chiswick Rd.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min  </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Chestnut Hill Ave.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min  </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>South St.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Boston College:6 min  </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Boston College</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+<p>  </p><br>
+
+<!--Cleveland Circle C-->
+<h5>Cleveland Circle:<span id="Cleveland Circle"></span></h5><br>
+<p>  </p><br>
+<h7>St. Mary's St.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Cleveland Circle: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Hawes St.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Cleveland Circle: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Kent St.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Cleveland Circle: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>St. Pauls St.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Cleveland Circle: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Cooldge Corner</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Cleveland Circle: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Summit Ave.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Cleveland Circle: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Brandon Hall</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Cleveland Circle: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Fairbanks</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Cleveland Circle: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Washington Sq.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Cleveland Circle: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Tappan St.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Cleveland Circle: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Dean Rd.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Cleveland Circle: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Englewood Ave.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Cleveland Circle: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Cleveland Circle</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+<p>  </p><br>
+
+<!--Riverside D-->
+<h5>Riverside:<span id="Riverside"></span></h5><br>
+<p>  </p><br>
+<h7>Fenway</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Riverside: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Longwood</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Riverside: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Brookline</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Riverside: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Brooline Hills</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Riverside: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Beaconsfield</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Riverside: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Resorvior</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Riverside: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Chestnut Hill</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Riverside: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Newton Centre</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Riverside: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Newtown Highlands</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Riverside: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Tappan St.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Riverside: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Eliot</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Riverside: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Waban</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Riverside: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Woodland</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Riverside: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Riverside</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+<p>  </p><br>
+
+<!--Heath St.-->
+<h7>Heath St:<span id="HeathSt"></span></h7><br>
+<p>  </p><br>
+<h7>Prudential</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Heath St.: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Symphony</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Heath St.: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Northeastern</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Heath St.: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Museum of Fine Arts</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Heath St.: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Longwood Medical Area</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Heath St.: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Brigham Circle</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Heath St.: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Fenwood</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Heath St.: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Mission Park</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Heath St.: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Riverway</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Heath St.: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Back of the Hill</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Union Sq: 1 min</div>
+<div>Heath St.: 5 min </div>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div>
+
+<h7>Heath St.</h7>
+<div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+<div>Meford/tufts: 1 min</div>
+<div>Government Center: 1 min</div>
+<div>Heath St.: 5 min</div> <br>
+<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+</div><br>
+
+<h8><a href="#Top"class="greenline"><h8>Top</h8></a></h8>
+<h5><span id="Bottom"></span></h5>
+
+</ul>
+</nav>
+</div>
+
+      
+   </ul>
+</nav>
+</div>

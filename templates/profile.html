@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>IstheMBTADown?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <a href="{{ url_for('home')}}"><img src="{{ url_for('static', filename='images/image.png') }}" alt="MBTA DOWN logo with Title that says MBTA DOWN" width="540" height="240" ></a>       
+    <h1>Hello _!</h1>
+    <h2>Welcome to your Profile Page</h2>
+    <h2>Favorites</h2>
+   <div class="container_favorites">
+    <h7>Davis<h7>
+      <div class="flex-container_red">
+        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
+        <div>Alewife: 2 min</div>
+        <div>Braintree: 1 min</div>
+        <div>Ashmont 4 min</div>
+        <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+      </div>
+
+    <h7>Medford/Tufts</h7>
+    <div class="flex-container_green">
+     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
+     <div>Boston College:6 min </div>
+     <div>Cleveland Circle: 5 min</div>
+     <div>Riverside: 4 min</div>
+     <div>Heath St: 2 min</div>
+     <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+   </div>
+
+   </div>
+</body>
+<!-- hamburger menu -->
+<input id="page-nav-toggle" class="main-navigation-toggle" type="checkbox" />
+<label for="page-nav-toggle">
+  <svg class="icon--menu-toggle" viewBox="0 0 60 30">
+    <g class="icon-group">
+      <g class="icon--menu">
+        <path d="M 6 0 L 54 0" />
+        <path d="M 6 15 L 54 15" />
+        <path d="M 6 30 L 54 30" />
+      </g>
+      <g class="icon--close">
+        <path d="M 15 0 L 45 30" />
+        <path d="M 15 30 L 45 0" />
+      </g>
+    </g>
+  </svg>
+</label>
+
+<nav class="main-navigation">
+  <ul>
+    <li><a href="{{ url_for('home')}}">Homepage</a></li>
+    <li><a href="{{ url_for('lines')}}">Lines</a></li>
+    <li><a href="{{ url_for('login')}}">Profile</a></li>
+    <li><a href="{{ url_for('contact')}}">Contact</a></li>
+    <li><a href="{{ url_for('about')}}">About</a></li>
+  </ul>
+</nav>
+</html>

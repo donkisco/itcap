@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>IstheMBTADown?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <a href="{{ url_for('home')}}"><img src="{{ url_for('static', filename='images/image.png') }}" alt="MBTA DOWN logo with Title that says MBTA DOWN" width="540" height="240" ></a>       
+  <hr width="10px";>       
+    <h5>Login</h5>
+    <form method="POST" action="/login">   
+        <label for="username">Username:</label>
+        <input type="text" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" name="password" required>
+        <button type="submit">Login</button>
+    </form>
+    <h6>Don't have an account? <a href="{{ url_for('register')}}">Register</a></h6>
+<!-- hamburger menu -->
+    <input id="page-nav-toggle" class="main-navigation-toggle" type="checkbox" />
+    <label for="page-nav-toggle">
+      <svg class="icon--menu-toggle" viewBox="0 0 60 30">
+        <g class="icon-group">
+          <g class="icon--menu">
+            <path d="M 6 0 L 54 0" />
+            <path d="M 6 15 L 54 15" />
+            <path d="M 6 30 L 54 30" />
+          </g>
+          <g class="icon--close">
+            <path d="M 15 0 L 45 30" />
+            <path d="M 15 30 L 45 0" />
+          </g>
+        </g>
+      </svg>
+    </label>
+    
+    <nav class="main-navigation">
+      <ul>
+        <li><a href="{{ url_for('home')}}">Homepage</a></li>
+        <li><a href="{{ url_for('lines')}}">Lines</a></li>
+        <li><a href="{{ url_for('login')}}">Profile</a></li>
+        <li><a href="{{ url_for('contact')}}">Contact</a></li>
+        <li><a href="{{ url_for('about')}}">About</a></li>
+      </ul>
+    </nav>
+</body>
+</html>

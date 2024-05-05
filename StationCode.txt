@@ -1,0 +1,3 @@
+place-alfcl place-davis place-portr place-harsq place-cntsq place-knncl place-chmnl
+place-pktrm place-dwnxg place-sstat place-brdwy place-andrw place-jfk place-nqncy place-wlsta
+place-qnctr place-qamnl place-brntn place-shmnl place-fldcr place-smmnl place-asmnl
