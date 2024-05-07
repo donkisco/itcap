@@ -50,7 +50,7 @@
      <ul>
       <li><a href="{{ url_for('home')}}">Homepage</a></li>
       <li><a href="{{ url_for('lines')}}">Lines</a></li>
-      <li><a href="{{ url_for('login')}}">Profile</a></li>
+      <li><a href="{{ url_for('profile', username=current_user.username) }}">Profile</a></li>
       <li><a href="{{ url_for('contact')}}">Contact</a></li>
       <li><a href="{{ url_for('about')}}">About</a></li>
      </ul>
@@ -81,78 +81,68 @@
    <h8><a href="#Bottom"class="redline"><h8>Bottom</h8></a></h8><br><br>
     <!--ASHMONT-->
     <h5><span id="ALEWIFE"></span>ALEWIFE</h5>
-    <h7>Alewife</h7>
-    <div class="flex-container_red">
-        <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green" /></svg></div>
-        <!-- Display predictions here -->
-        <div id="alewife-braintree">Braintree: loading...</div>
-        <div id="alewife-ashmont">Ashmont: loading...</div>
-        <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+    <h7>Alewife<h7>
+      <div class="flex-container_red" data-line-id="1">
+        <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green;"/></svg></div>
+        <div id="alewife-direction_0_predictions">Braintree: <span></span></div>
+        <div id="alewife-direction_1_predictions">Ashmont: <span></span></div>
+        <div><input type="checkbox" id="alewife-favorites" class="save" value="favorites" unchecked /><label for="alewife-favorites">Favorites</label></div>
       </div>
 
       <h7>Davis<h7>
-        <div class="flex-container_red">
-          <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green"/></svg></div>
-          <!-- Call fetchPredictions JavaScript function to update these dynamically -->
-          <div id="davis-alewife">Alewife: loading...</div>
-          <div id="davis-braintree">Braintree: loading...</div>
-          <div id="davis-ashmont">Ashmont: loading...</div>
-          <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+        <div class="flex-container_red" data-line-id="1">
+          <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green;"/></svg></div>
+          <div id="davis-direction_0_predictions">Alewife: <span></span></div>
+          <div id="davis-direction_1_predictions">Braintree: <span></span></div>
+          <div id="davis-direction_2_predictions">Ashmont: <span></span></div>
+          <div><input type="checkbox" id="davis-favorites" class="save" value="favorites" unchecked /><label for="davis-favorites">Favorites</label></div>
         </div>
         
 
  
-    <h7>Porter</h7>
-    <div class="flex-container_red">
-        <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green" /></svg></div>
-        <!-- Display predictions here -->
-       
-        <!-- Block for Alewife Trains -->
-        <div id="Porter-alewife">Alewife: loading...</div>
-        <div id="Porter-braintree">Braintree: loading...</div>
-        <div id="Porter-ashmont">Ashmont: loading...</div>
-        <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
-      </div>
+    <h7>Porter</h7>    
+    <div class="flex-container_red" data-line-id="1">
+      <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green;"/></svg></div>
+      <div id="Porter-direction_0_predictions">Alewife: <span></span></div>
+      <div id="Porter-direction_1_predictions">Braintree: <span></span></div>
+      <div id="Porter-direction_1_predictions">Ashmont: <span></span></div>
+      <div><input type="checkbox" id="suffolkdowns-favorites" class="save" value="favorites" unchecked /><label for="suffolkdowns-favorites">Favorites</label></div>
     </div>
 
-        <!-- Script to display the predictions from flask-->    
     <script>
-      $(document).ready(function() {
-          function updateStationInfo(line, station) {
-              $.ajax({
-                  url: '/station/' + line + '/' + station,
-                  type: 'GET',
-                  dataType: 'json',
-                  success: function(data) {
-                      var alewifeText = data.alewife_predictions.map(function(prediction) {
-                          return prediction.departure_time;  // Extract the departure_time for each prediction
-                      }).join(", ");
-                      $('#' + station + '-alewife').text('Alewife: ' + (alewifeText || "No predictions"));
+      
+  $(document).ready(function() {
+    function updateStationInfo(line, station) {
+        $.ajax({
+            url: '/station/' + line + '/' + station,
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);  // Log data to see its structure each time
 
-                      var braintreeText = data.braintree_predictions.map(function(prediction) {
-                          return prediction.departure_time;  // Extract the departure_time for each prediction
-                      }).join(", ");
-                      $('#' + station + '-braintree').text('Braintree: ' + (braintreeText || "No predictions"));
+                // Dynamically populate the data based on prediction types
+                ['direction_0_predictions', 'direction_1_predictions'].forEach(function(predictionType) {
+                    if (data[predictionType] && Array.isArray(data[predictionType])) {
+                        var predictionText = data[predictionType].map(function(prediction) {
+                            return prediction.departure_time; // Extract the departure_time for each prediction
+                        }).join(", ");
 
-                      var ashmontText = data.ashmont_predictions.map(function(prediction) {
-                          return prediction.departure_time;  // Extract the departure_time for each prediction
-                      }).join(", ");
-                      $('#' + station + '-ashmont').text('Ashmont: ' + (ashmontText || "No predictions"));
-
-                      var mattapanText = data.mattapan_predictions.map(function(prediction) {
-                          return prediction.departure_time;  // Extract the departure_time for each prediction
-                      }).join(", ");
-                      $('#' + station + '-mattapan').text('Mattapan: ' + (mattapanText || "No predictions"));
-                  },
-                  error: function(xhr, status, error) {
-                      $('#' + station + '-alewife').text('Alewife: Error loading data');
-                      $('#' + station + '-braintree').text('Braintree: Error loading data');
-                      $('#' + station + '-ashmont').text('Ashmont: Error loading data');
-                      $('#' + station + '-mattapan').text('Mattapan: Error loading data');
-                  }
-              });
-          }
-
+                        // Update the corresponding station and prediction type
+                        var selector = '#' + station + '-' + predictionType + ' span';
+                        $(selector).text(predictionText || "No predictions");
+                    }
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX error:", error);  // Log the AJAX error
+                ['direction_0_predictions', 'direction_1_predictions'].forEach(function(predictionType) {
+                    var selector = '#' + station + '-' + predictionType + ' span';
+                    $(selector).text('Error loading data');
+                });
+            }
+        });
+    }
+    
           var stations = [
               "alewife", 
               "davis", 
@@ -175,18 +165,11 @@
               "Savin-Hill", 
               "Fields-Corner", 
               "Shawmut", 
-              "Ashmont",
-              "Cedar-Grove",
-              "Butler",
-              "Milton",
-              "Central-Ave",
-              "Valley-Rd",
-              "Capen-St",
-              "Mattapan"
+              "Ashmont"
           ];
 
-          var line = 'red'; 
-
+          var line = 'red'; // This should be dynamically set as needed
+    
           stations.forEach(function(station) {
               updateStationInfo(line, station);
               setInterval(function() {
@@ -194,12 +177,61 @@
               }, 30000);
           });
       });
+
+
+      $(document).ready(function() {
+        let baseStationId = 100; // Starting ID for Red Line stations
+
+        // Dynamically assign station IDs to each container
+        $('.flex-container_red').each(function(index) {
+            $(this).attr('data-station-id', baseStationId + index);
+            console.log('Station ID for ' + $(this).find('h7').text() + ': ' + (baseStationId + index));
+        });
+    });
+
+
+    $(document).ready(function() {
+    const lineId = 1; // Assuming line ID is constant for all stations in this script
+
+    // Event handler for checkbox changes
+    $('.flex-container_red .save').change(function() {
+        var container = $(this).closest('.flex-container_red');
+        var stationId = container.data('station-id');
+        var isChecked = $(this).is(':checked');
+
+        console.log('Sending:', {station_id: stationId, line_id: lineId, favorite: isChecked});  // Log the data
+
+        $.ajax({
+            url: '/add_favorite',
+            method: 'POST',
+            data: {
+                station_id: stationId,
+                line_id: lineId,
+                favorite: isChecked
+            },
+            success: function(response) {
+                alert(response.message);
+            },
+            error: function() {
+                alert('Error processing favorite.');
+            }
+        });
+    });
+});
+
+
+
+
+
     </script>
     
+    
+   
+
 
     
     <h7>Harvard<h7>
-      <div class="flex-container_red">
+      <div class="flex-container_red" data-line-id="1">
         <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green"/></svg></div>
         <div id="Harvard-alewife">Alewife: loading...</div>
         <div id="Harvard-braintree">Braintree: loading...</div>
@@ -209,7 +241,7 @@
       
 
    <h7>Central<h7>
-    <div class="flex-container_red">
+    <div class="flex-container_red" data-line-id="1">
       <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green"/></svg></div>
       <div id="Central-alewife">Alewife: loading...</div>
       <div id="Central-braintree">Braintree: loading...</div>
@@ -218,7 +250,7 @@
     </div>
 
    <h7>Kendal/MIT<h7>
-      <div class="flex-container_red">
+      <div class="flex-container_red" data-line-id="1">
         <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green"/></svg></div>
         <div id="Kendal-alewife">Alewife: loading...</div>
         <div id="Kendal-braintree">Braintree: loading...</div>
@@ -227,7 +259,7 @@
       </div>
    
    <h7>Charles/MGH<h7>
-    <div class="flex-container_red">
+    <div class="flex-container_red" data-line-id="1">
       <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green"/></svg></div>
       <div id="Charles-alewife">Alewife: loading...</div>
       <div id="Charles-braintree">Braintree: loading...</div>
@@ -236,18 +268,16 @@
     </div>
    
    <h7>Park St.<h7>
-    <div class="flex-container_red">
+    <div class="flex-container_red" data-line-id="1">
       <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green"/></svg></div>
       <div id="Park-Street-alewife">Alewife: loading...</div>
       <div id="Park-Street-braintree">Braintree: loading...</div>
       <div id="Park-Street-ashmont">Ashmont: loading...</div>
-
-      <div><a href="{{ url_for('greenline')}}"class=greenline>Green line</a></div>
       <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
     </div>
    
    <h7>Downtown Crossing<h7>
-    <div class="flex-container_red">
+    <div class="flex-container_red" data-line-id="1">
       <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green"/></svg></div>
       <div id="downtowncrossing-alewife">Alewife: loading...</div>
       <div id="downtowncrossing-braintree">Braintree: loading...</div>
@@ -258,7 +288,7 @@
    </div>
    
    <h7>South Station<h7>
-   <div class="flex-container_red">
+   <div class="flex-container_red" data-line-id="1">
       <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green"/></svg></div>
       <div id="South-Station-alewife">Alewife: loading...</div>
       <div id="South-Station-braintree">Braintree: loading...</div>
@@ -267,7 +297,7 @@
     </div>
    
    <h7>Broadway<h7>
-    <div class="flex-container_red">
+    <div class="flex-container_red" data-line-id="1">
       <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green"/></svg></div>
       <div id="Broadway-alewife">Alewife: loading...</div>
       <div id="Broadway-braintree">Braintree: loading...</div>
@@ -276,7 +306,7 @@
     </div>
    
    <h7>Andrew<h7>
-    <div class="flex-container_red">
+    <div class="flex-container_red" data-line-id="1">
       <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green"/></svg></div>
       <div id="Andrew-alewife">Alewife: loading...</div>
       <div id="Andrew-braintree">Braintree: loading...</div>
@@ -286,7 +316,7 @@
    
 
    <h7>JFK/UMASS<h7>
-    <div class="flex-container_red">
+    <div class="flex-container_red" data-line-id="1">
       <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green"/></svg></div>
       <div id="JFK-alewife">Alewife: loading...</div>
       <div id="JFK-braintree">Braintree: loading...</div>
@@ -298,7 +328,7 @@
    <h5>ASHMONT<span id="ASHMONT"></span></h5><br>
    
    <h7>Savin Hill<h7>
-    <div class="flex-container_red">
+    <div class="flex-container_red" data-line-id="1">
       <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green"/></svg></div>
       <div id="Savin-Hill-alewife">Alewife: loading...</div>
       <div id="Savin-Hill-braintree">Braintree: loading...</div>
@@ -307,7 +337,7 @@
     </div>
 
    <h7>Fields Corner<h7>
-    <div class="flex-container_red">
+    <div class="flex-container_red" data-line-id="1">
       <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green"/></svg></div>
       <div id="Fields-Corner-alewife">Alewife: loading...</div>
       <div id="Fields-Corner-braintree">Braintree: loading...</div>
@@ -316,7 +346,7 @@
     </div>
 
    <h7>Shawmut<h7>
-   <div class="flex-container_red">
+   <div class="flex-container_red" data-line-id="1">
       <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green"/></svg></div>
       <div id="Shawmut-alewife">Alewife: loading...</div>
       <div id="Shawmut-braintree">Braintree: loading...</div>
@@ -325,51 +355,50 @@
     </div>
 
      <h7>ASHMONT<h7>
-   <div class="flex-container_red">
+   <div class="flex-container_red" data-line-id="1">
      <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-     <div id="Ashmont-alewife">Alewife: loading...</div>
+     <div>Alewife: 2 min</div>
      <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
      </div>
     
      <!--Braintree Line-->
      <h5>BRAINTREE<span id="BRAINTREE"></span></h5>
        <h7>North Quincy<h7>
-       <div class="flex-container_red">
+       <div class="flex-container_red" data-line-id="1">
          <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-         <div id="North-Quincy-alewife">Alewife: loading...</div>
-         <div id="North-Quincy-braintree">Braintree: loading...</div>
-         <div id="North-Quincy-ashmont">Ashmont: loading...</div>
+         <div>Alewife: 2 min</div>
+         <div>Braintree: 1 min</div>
        <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
      </div>
      
      <h7>Wollaston<h7>
-     <div class="flex-container_red">
+     <div class="flex-container_red" data-line-id="1">
        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-       <div id="Wollaston-alewife">Alewife: loading...</div>
-       <div id="Wollaston-braintree">Braintree: loading...</div>
+       <div>Alewife: 2 min</div>
+       <div>Braintree: 1 min</div>
        <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
      </div>
 
      <h7>Quincy Center<h7>
-     <div class="flex-container_red">
+     <div class="flex-container_red" data-line-id="1">
        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>          
-       <div id="Quincy-Center-alewife">Alewife: loading...</div>
-       <div id="Quincy-Center-braintree">Braintree: loading...</div>
+       <div>Alewife: 2 min</div>
+       <div>Braintree: 1 min</div>
        <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
      </div>
 
      <h7>Quincy Adams<h7>
-     <div class="flex-container_red">
+     <div class="flex-container_red" data-line-id="1">
        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-       <div id="Quincy-Adams-alewife">Alewife: loading...</div>
-       <div id="Quincy-Adams-braintree">Braintree: loading...</div>
+       <div>Alewife: 2 min</div>
+       <div>Braintree: 1 min</div>
        <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
      </div>
 
      <h7>Braintree<h7>
-     <div class="flex-container_red">
+     <div class="flex-container_red" data-line-id="1">
        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-       <div id="alewife-alewife">Alewife: loading...</div>
+       <div>Alewife: 2 min</div>
        <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
      </div>
 
@@ -377,57 +406,57 @@
      <h5>MATTAPAN<span id="MATTAPAN"></span></h5>
        
      <h7>Cedar Grove<h7>
-       <div class="flex-container_red">
+       <div class="flex-container_red" data-line-id="1">
          <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-         <div id="Cedar-Grove-ashmont">Ashmont: loading...</div>
-         <div id="Cedar-Grove-mattapan">Mattapan: loading...</div>
+         <div>Ashmont 4 min</div>
+         <div>Mattapan 4 min</div>
          <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
      </div>
 
      <h7>Butler<h7>
-     <div class="flex-container_red">
+     <div class="flex-container_red" data-line-id="1">
        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-       <div id="Butler-ashmont">Ashmont: loading...</div>
-       <div id="Butler-mattapan">Mattapan: loading...</div>
+       <div>Ashmont 4 min</div>
+       <div>Mattapan 4 min</div>
        <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
      </div>
 
      <h7>Milton<h7>
-     <div class="flex-container_red">
+     <div class="flex-container_red" data-line-id="1">
        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-       <div id="Milton-ashmont">Ashmont: loading...</div>
-       <div id="Milton-mattapan">Mattapan: loading...</div>
+       <div>Ashmont 4 min</div>
+       <div>Mattapan 4 min</div>
        <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
      </div>
 
      <h7>Central Ave<h7>
-     <div class="flex-container_red">
+     <div class="flex-container_red" data-line-id="1">
        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-       <div id="Central-Ave-ashmont">Ashmont: loading...</div>
-       <div id="Central-Ave-mattapan">Mattapan: loading...</div>
+       <div>Ashmont 4 min</div>
+       <div>Mattapan 4 min</div>
        <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
      </div>
 
      <h7>Valley Rd<h7>
-     <div class="flex-container_red">
+     <div class="flex-container_red" data-line-id="1">
        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-       <div id="Valley-Rd-ashmont">Ashmont: loading...</div>
-       <div id="Valley-Rd-mattapan">Mattapan: loading...</div>
+       <div>Ashmont 4 min</div>
+       <div>Mattapan 4 min</div>
        <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
      </div>
 
      <h7>Capen St<h7>
-     <div class="flex-container_red">
+     <div class="flex-container_red" data-line-id="1">
        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-       <div id="Capen-St-ashmont">Ashmont: loading...</div>
-       <div id="Capen-St-mattapan">Mattapan: loading...</div>
+       <div>Ashmont 4 min</div>
+       <div>Mattapan 4 min</div>
        <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
      </div>
 
      <h7>Mattapan<h7>
-     <div class="flex-container_red">
+     <div class="flex-container_red" data-line-id="1">
        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-       <div id="Mattapan-ashmont">Ashmont: loading...</div>
+       <div>ASHMONT 4 min</div>
        <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
      </div>
 

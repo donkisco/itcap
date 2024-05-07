@@ -8,28 +8,16 @@
 </head>
 <body>
   <a href="{{ url_for('home')}}"><img src="{{ url_for('static', filename='images/image.png') }}" alt="MBTA DOWN logo with Title that says MBTA DOWN" width="540" height="240" ></a>       
-    <h1>Hello _!</h1>
+    <h1>Hello {{ user.first_name }}!</h1>
     <h2>Welcome to your Profile Page</h2>
+    <h1>Welcome, {{ user.username }}!</h1>
+    <!-- logout button -->
+    <form action="{{ url_for('logout') }}" method="post">
+        <input type="submit" value="Logout">
+    </form>
     <h2>Favorites</h2>
    <div class="container_favorites">
-    <h7>Davis<h7>
-      <div class="flex-container_red">
-        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-        <div>Alewife: 2 min</div>
-        <div>Braintree: 1 min</div>
-        <div>Ashmont 4 min</div>
-        <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
-      </div>
 
-    <h7>Medford/Tufts</h7>
-    <div class="flex-container_green">
-     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg></div>
-     <div>Boston College:6 min </div>
-     <div>Cleveland Circle: 5 min</div>
-     <div>Riverside: 4 min</div>
-     <div>Heath St: 2 min</div>
-     <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
-   </div>
 
    </div>
 </body>
@@ -55,9 +43,8 @@
   <ul>
     <li><a href="{{ url_for('home')}}">Homepage</a></li>
     <li><a href="{{ url_for('lines')}}">Lines</a></li>
-    <li><a href="{{ url_for('login')}}">Profile</a></li>
+    <li><a href="{{ url_for('profile', username=current_user.username) }}">Profile</a></li> <!-- Add username parameter -->
     <li><a href="{{ url_for('contact')}}">Contact</a></li>
     <li><a href="{{ url_for('about')}}">About</a></li>
   </ul>
 </nav>
-</html>

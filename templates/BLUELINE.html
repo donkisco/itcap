@@ -25,6 +25,115 @@
       <title>IstheMBTADown?</title>
       <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="/static/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    
+<script>
+
+  
+    $(document).ready(function() {
+          let baseStationId = 200; // Starting ID for Red Line stations
+
+          // Dynamically assign station IDs to each container
+          $('.flex-container_blue').each(function(index) {
+              $(this).attr('data-station-id', baseStationId + index);
+              console.log('Station ID for ' + $(this).find('h7').text() + ': ' + (baseStationId + index));
+          });
+      });
+
+
+      $(document).ready(function() {
+      const lineId = 2; // Assuming line ID is constant for all stations in this script
+
+      // Event handler for checkbox changes
+      $('.flex-container_blue .save').change(function() {
+          var container = $(this).closest('.flex-container_blue');
+          var stationId = container.data('station-id');
+          var isChecked = $(this).is(':checked');
+
+          console.log('Sending:', {station_id: stationId, line_id: lineId, favorite: isChecked});  // Log the data
+
+          $.ajax({
+              url: '/add_favorite',
+              method: 'POST',
+              data: {
+                  station_id: stationId,
+                  line_id: lineId,
+                  favorite: isChecked
+              },
+              success: function(response) {
+                  alert(response.message);
+              },
+              error: function() {
+                  alert('Error processing favorite.');
+              }
+          });
+      });
+  });
+
+
+  $(document).ready(function() {
+    function updateStationInfo(line, station) {
+        $.ajax({
+            url: '/station/' + line + '/' + station,
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);  // Log data to see its structure each time
+
+                // Dynamically populate the data based on prediction types
+                ['direction_0_predictions', 'direction_1_predictions'].forEach(function(predictionType) {
+                    if (data[predictionType] && Array.isArray(data[predictionType])) {
+                        var predictionText = data[predictionType].map(function(prediction) {
+                            return prediction.departure_time; // Extract the departure_time for each prediction
+                        }).join(", ");
+
+                        // Update the corresponding station and prediction type
+                        var selector = '#' + station + '-' + predictionType + ' span';
+                        $(selector).text(predictionText || "No predictions");
+                    }
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX error:", error);  // Log the AJAX error
+                ['direction_0_predictions', 'direction_1_predictions'].forEach(function(predictionType) {
+                    var selector = '#' + station + '-' + predictionType + ' span';
+                    $(selector).text('Error loading data');
+                });
+            }
+        });
+    }
+
+    // Array of stations should be dynamically set if possible
+    var stations = [
+        "wonderland", 
+        "reverebeach", 
+        "beachmont", 
+        "suffolkdowns", 
+        "orientheights", 
+        "woodisland",
+        "airport", 
+        "maverick", 
+        "aquarium", 
+        "state", 
+        "governmentcenter", 
+        "bowdoin"
+    ];
+
+    var line = 'blue'; // This should be dynamically set as needed
+
+    stations.forEach(function(station) {
+        updateStationInfo(line, station);
+        setInterval(function() {
+            updateStationInfo(line, station);
+        }, 30000); // Refresh every 30 seconds
+    });
+});
+
+
+
+
+</script>
     
    </head>
 
@@ -50,7 +159,7 @@
      <ul>
       <li><a href="{{ url_for('home')}}">Homepage</a></li>
       <li><a href="{{ url_for('lines')}}">Lines</a></li>
-      <li><a href="{{ url_for('login')}}">Profile</a></li>
+      <li><a href="{{ url_for('profile', username=current_user.username) }}">Profile</a></li>
       <li><a href="{{ url_for('contact')}}">Contact</a></li>
       <li><a href="{{ url_for('about')}}">About</a></li>
      </ul>
@@ -77,176 +186,113 @@
        
       <h8><a href="#Bottom"class="blueline"><h8>Bottom</h8></a></h8><br><br>
       
+      <!--NORTH/EAST SIDE-->
 
-
-    <h5><span id="WONDERLAND"></span>WONDERLAND</h5>
-    <h7>Wonderland</h7>
-      <div class="flex-container_blue">
-        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-        <div id="wonderland-bowdoin">Bowdoin: loading...</div>
-        <div id="wonderland-governmentcenter">Government-Center: loading...</div>
-      <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+      <h7>Wonderland:<span id="wonderland-title"></span></h7><br>
+      <div class="flex-container_blue" data-line-id="2">
+        <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green"/></svg></div>
+        <div id="wonderland-direction_0_predictions">Bowdoin: <span></span></div>
+        <div>
+          <input type="checkbox" id="wonderland-favorites" class="save" value="favorites" unchecked>
+          <label for="wonderland-favorites">Favorites</label>
+        </div>
+      </div>
+      
+      <h7>Revere Beach</h7>
+      <div class="flex-container_blue" data-line-id="2">
+        <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green;"/></svg></div>
+        <div id="reverebeach-direction_0_predictions">Wonderland: <span></span></div>
+        <div id="reverebeach-direction_1_predictions">Bowdoin: <span></span></div>
+        <div><input type="checkbox" id="orientheights-favorites" class="save" value="favorites" unchecked /><label for="orientheights-favorites">Favorites</label></div>
       </div>
 
-        <!--NORTH/South SIDE-->
-
-    <!-- Script to display the predictions from flask-->    
-    <script>
-      $(document).ready(function() {
-          function updateStationInfo(line, station) {
-              $.ajax({
-                  url: '/station/' + line + '/' + station,
-                  type: 'GET',
-                  dataType: 'json',
-                  success: function(data) {
-                      var wonderlandText = data.wonderland_predictions.map(function(prediction) {
-                          return prediction.departure_time;  // Extract the departure_time for each prediction
-                      }).join(", ");
-                      $('#' + station + '-wonderland').text('wonderland: ' + (wonderlandText || "No predictions"));
-
-                      var bowdoinText = data.bowdion_predictions.map(function(prediction) {
-                          return prediction.departure_time;  // Extract the departure_time for each prediction
-                      }).join(", ");
-                      $('#' + station + '-bowdoin').text('Bowdoin: ' + (bowdoinText || "No predictions"));
-
-                      var governmentcenterText = data.governmentcenter_predictions.map(function(prediction) {
-                          return prediction.departure_time;  // Extract the departure_time for each prediction
-                      }).join(", ");
-                      $('#' + station + '-governmentcenter').text('GovernmentCenter: ' + (governmentcenterText || "No predictions"));
-                  },    
-                  error: function(xhr, status, error) {
-                      $('#' + station + '-wonderland').text('Wonderland: Error loading data');
-                      $('#' + station + '-bowdoin').text('Bowdoin: Error loading data');
-                      $('#' + station + '-governmentcenter').text('GovernmentCenter: Error loading data');
-                  }
-              });
-          }
-
-          var stations = [
-              "wonderland", 
-              "reverebeach", 
-              "beachmont", 
-              "suffolkdowns", 
-              "orientheights", 
-              "woodisland", 
-              "airport", 
-              "maverick", 
-              "aquarium", 
-              "state", 
-              "governmentcenter", 
-              "bowdoin"
-          ];
-
-          var line = 'blue'; 
-
-          stations.forEach(function(station) {
-              updateStationInfo(line, station);
-              setInterval(function() {
-                  updateStationInfo(line, station);
-              }, 30000);
-          });
-      });
-    </script>
+  
+      <h7>Suffolk Downs</h7>
+      <div class="flex-container_blue" data-line-id="2">
+        <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green;"/></svg></div>
+        <div id="suffolkdowns-direction_0_predictions">Wonderland <span></span></div>
+        <div id="suffolkdowns-direction_1_predictions">Bowdoin: <span></span></div>
+        <div><input type="checkbox" id="suffolkdowns-favorites" class="save" value="favorites" unchecked /><label for="suffolkdowns-favorites">Favorites</label></div>
+      </div>
+      
+      <h7>Orient Heights</h7>
+      <div class="flex-container_blue" data-line-id="2">
+        <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green;"/></svg></div>
+        <div id="orientheights-direction_0_predictions">Wonderland: <span></span></div>
+        <div id="orientheights-direction_1_predictions">Bowdoin: <span></span></div>
+        <div><input type="checkbox" id="orientheights-favorites" class="save" value="favorites" unchecked /><label for="orientheights-favorites">Favorites</label></div>
+      </div>
     
-   <h7>Revere Beach</h7>
-   <div class="flex-container_blue">
-    <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-    <div id="reverebeach-bowdoin">Bowdoin: loading...</div>
-    <div id="reverebeach-governmentcenter">Government-Center: loading...</div>
-    <div id="reverebeach-wonderland">Government-Center: loading...</div>
-    <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
-  </div>
-
-  
-   
-  </div>
-  <h7>Suffolk Downs</h7>
-  <div class="flex-container_blue">
-    <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-   <div>Wonderland :6 min </div>
-   <div>Bodowin: 2 min </div>
-   <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
- </div>
+      <!-- Update based on the stations table (names of the stations as they are) -->
 
  
-  
- <h7>Orient Hieghts</h7>
- <div class="flex-container_blue">
-  <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-  <div>Wonderland :6 min </div>
-  <div>Bodowin: 2 min </div>
-  <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
-</div>
-
-
- 
-<h7>Wood Island</h7>
-<div class="flex-container_blue">
-  <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
- <div>Wonderland :6 min </div>
- <div>Bodowin: 2 min </div>
- <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
-</div>
+      <h7>Wood Island</h7>
+      <div class="flex-container_blue " data-line-id="2">
+        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
+        <div id="woodisland-direction_0_predictions">Wonderland: <span></span></div>
+        <div id="woodisland-direction_1_predictions">Bowdoin: <span></span></div>
+        <div><input type="checkbox" id="woodisland-favorites" class="save" value="favorites" unchecked /><label for="woodisland-favorites">Favorites</label></div>
+      </div>
 
 
 
-<h7>Airport</h7>
-<div class="flex-container_blue">
-<div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-<div>Wonderland :6 min </div>
-<div>Bodowin: 2 min </div>
-<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
-</div>
+      <h7>Airport</h7>
+      <div class="flex-container_blue " data-line-id="2">
+        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
+        <div id="airport-direction_0_predictions">Wonderland: <span></span></div>
+        <div id="airport-direction_1_predictions">Bowdoin: <span></span></div>
+        <div><input type="checkbox" id="airport-favorites" class="save" value="favorites" unchecked /><label for="airport-favorites">Favorites</label></div>
+      </div>
 
 
 
-<h7>Maverick</h7>
-<div class="flex-container_blue">
-<div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-<div>Wonderland :6 min </div>
-<div>Bodowin: 2 min </div>
-<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
-</div>
+      <h7>Maverick</h7>
+      <div class="flex-container_blue " data-line-id="2">
+        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
+        <div id="wonderland-direction_0_predictions">Wonderland: <span></span></div>
+        <div id="maverick-direction_1_predictions">Bowdoin: <span></span></div>
+        <div><input type="checkbox" id="maverick-favorites" class="save" value="favorites" unchecked /><label for="maverick-favorites">Favorites</label></div>
+      </div>
 
 
 
-<h7>Aquarium</h7>
-<div class="flex-container_blue">
-<div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-<div>Wonderland :6 min </div>
-<div>Bodowin: 2 min </div>
-<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
-</div>
+      <h7>Aquarium</h7>
+      <div class="flex-container_blue " data-line-id="2">
+        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
+        <div id="aquarium-direction_0_predictions">Wonderland: <span></span></div>
+        <div id="aquarium-direction_1_predictions">Bowdoin: <span></span></div>
+        <div><input type="checkbox" id="aquarium-favorites" class="save" value="favorites" unchecked /><label for="aquarium-favorites">Favorites</label></div>
+      </div>
 
 <p>  </p><br>
 
-<h7>State</h7>
-<div class="flex-container_blue">
-<div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-<div>Wonderland :6 min </div>
-<div>Bodowin: 2 min </div>
-<div><a href="{{ url_for('orangeline')}}"class=orangeline>Orange line</a></div>
-<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
-</div>
+      <h7>State</h7>
+      <div class="flex-container_blue " data-line-id="2">
+      <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
+        <div id="state-direction_0_predictions">Wonderland: <span></span></div>
+        <div id="state-direction_1_predictions">Bowdoin: <span></span></div>
+        <div><a href="{{ url_for('orangeline')}}"class=orangeline>Orange line</a></div>
+        <div><input type="checkbox" id="state-favorites" class="save" value="favorites" unchecked /><label for="state-favorites">Favorites</label></div>
+      </div>
 
 
-<h7>Government Center</h7>
-<div class="flex-container_blue">
-<div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-<div>Wonderland :6 min </div>
-<div>Bodowin: 2 min </div>
-<div><a href="{{ url_for('greenline')}}"class=greenline>Greenline line</a></div>
-<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
-</div>
+      <h7>Government Center</h7>
+      <div class="flex-container_blue " data-line-id="2">
+        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
+        <div id="governmentcenter-direction_0_predictions">Wonderland: <span></span></div>
+        <div id="governementcenter-direction_1_predictions">Bowdoin: <span></span></div>
+        <div><a href="{{ url_for('greenline')}}"class=greenline>Greenline line</a></div>
+        <div><input type="checkbox" id="governementcenter-favorites" class="save" value="favorites" unchecked /><label for="governementcenter-favorites">Favorites</label></div>
+      </div>
 
 <p>  </p><br>
 
-<h7>Bodowin</h7>
-<div class="flex-container_blue">
-<div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-<div>Wonderland :6 min </div>
-<div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
-</div>
+      <h7>Bowdoin</h7>
+      <div class="flex-container_blue " data-line-id="2">
+        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
+        <div id="-direction_0_predictions">Wonderland: <span></span></div>
+        <div><input type="checkbox" id="bowdoin-favorites" class="save" value="favorites" unchecked /><label for="bowdoin-favorites">Favorites</label></div>
+      </div>
 <p>  </p><br>
 
 
@@ -257,4 +303,6 @@
 
 </ul>
 </nav>
+
+
 </div>

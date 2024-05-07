@@ -25,6 +25,7 @@
    <title>IstheMBTADown?</title>
    <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
  <link rel="stylesheet" href="/static/style.css">
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
 
    <!--Navigation Page-->
@@ -49,7 +50,7 @@
      <ul>
       <li><a href="{{ url_for('home')}}">Homepage</a></li>
       <li><a href="{{ url_for('lines')}}">Lines</a></li>
-      <li><a href="{{ url_for('login')}}">Profile</a></li>
+      <li><a href="{{ url_for('profile', username=current_user.username) }}">Profile</a></li>
       <li><a href="{{ url_for('contact')}}">Contact</a></li>
       <li><a href="{{ url_for('about')}}">About</a></li>
      </ul>
@@ -77,37 +78,50 @@
       
       
       <!--NORTH/EAST SIDE-->
-      <h7>Forest Hills:<span id="Forest Hills"></span></h7><br>
-      <div class="flex-container_orange">
-       <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-       <div>Oak Grove :6 min </div>
-       <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
-     </div>
+      
+
+     <h7>Forest Hills:</h7><br>
+    <div class="flex-container_orange">
+      <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green;"/></svg></div>
+      <div id="foresthills-direction_1_predictions">Oak Grove: <span></span></div>
+      
+      <div><input type="checkbox" id="foresthills-favorites" class="save" value="favorites" unchecked /><label for="foresthills-favorites"> Favorites</label></div>
+    </div>
+
     
    <h7>Green St.</h7>
    <div class="flex-container_orange">
-     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-     <div>Forest Hills :6 min </div>
-     <div>Oak Grove: 2 min </div>
-     <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+    <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green;"/></svg></div>
+    <div id="greenstreet-direction_0_predictions">Forest Hills : <span></span></div>
+    <div id="greenstreet-direction_1_predictions">Oak Grove: <span></span></div>
+    <div><input type="checkbox" id="foresthills-favorites" class="save" value="favorites" unchecked /><label for="foresthills-favorites"> Favorites</label></div>
   </div>
+
+
+ 
+
+
 
   <h7>Stony Brook</h7><br>
   <div class="flex-container_orange">
-   <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-   <div>Forest Hills :6 min </div>
-   <div>Oak Grove: 2 min </div>
-   <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+    <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green;"/></svg></div>
+    <div id="stonybrook-direction_0_predictions">Forest Hills : <span></span></div>
+    <div id="stonybrook-direction_1_predictions">Oak Grove: <span></span></div>
+    <div><input type="checkbox" id="foresthills-favorites" class="save" value="favorites" unchecked /><label for="foresthills-favorites"> Favorites</label></div>
   </div>
   
    <h7>Jackson Square</h7>
    <div class="flex-container_orange">
-     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-     <div>Forest Hills :6 min </div>
-     <div>Oak Grove: 2 min </div>
-     <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+    <div>Status: <svg width="20" height="20"><rect width="20" height="20" style="fill:green;"/></svg></div>
+    <div id="jacksonsquare-direction_0_predictions">Forest Hills : <span></span></div>
+    <div id="jacksonsquare-direction_1_predictions">Oak Grove: <span></span></div>
+    <div><input type="checkbox" id="foresthills-favorites" class="save" value="favorites" unchecked /><label for="foresthills-favorites"> Favorites</label></div>
   </div>
 
+
+  <!-- Make similar changes with adding the div ID based on the station name in the stations
+  var in the script followd by either -direction_0_predictions for forest hills and -direction_1_predictions
+for oak grove -->
   </div>
   <h7>Roxbury Sqaure</h7>
   <div class="flex-container_orange">
@@ -245,4 +259,104 @@
 
     </ul>
 </nav>
+
+
+
+<script>  
+  $(document).ready(function() {
+          let baseStationId = 400; // Starting ID for Red Line stations
+
+          // Dynamically assign station IDs to each container
+          $('.flex-container_orange').each(function(index) {
+              $(this).attr('data-station-id', baseStationId + index);
+              console.log('Station ID for ' + $(this).find('h7').text() + ': ' + (baseStationId + index));
+          });
+      });
+
+
+      $(document).ready(function() {
+      const lineId = 4; // Assuming line ID is constant for all stations in this script
+
+      // Event handler for checkbox changes
+      $('.flex-container_orange .save').change(function() {
+          var container = $(this).closest('.flex-container_orange');
+          var stationId = container.data('station-id');
+          var isChecked = $(this).is(':checked');
+
+          console.log('Sending:', {station_id: stationId, line_id: lineId, favorite: isChecked});  // Log the data
+
+          $.ajax({
+              url: '/add_favorite',
+              method: 'POST',
+              data: {
+                  station_id: stationId,
+                  line_id: lineId,
+                  favorite: isChecked
+              },
+              success: function(response) {
+                  alert(response.message);
+              },
+              error: function() {
+                  alert('Error processing favorite.');
+              }
+          });
+      });
+  });
+
+
+
+  $(document).ready(function() {
+    function updateStationInfo(line, station) {
+        $.ajax({
+            url: '/station/' + line + '/' + station,
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);  // Log data to see its structure each time
+
+                // Dynamically populate the data based on prediction types
+                ['direction_0_predictions', 'direction_1_predictions'].forEach(function(predictionType) {
+                    if (data[predictionType] && Array.isArray(data[predictionType])) {
+                        var predictionText = data[predictionType].map(function(prediction) {
+                            return prediction.departure_time; // Extract the departure_time for each prediction
+                        }).join(", ");
+
+                        // Update the corresponding station and prediction type
+                        var selector = '#' + station + '-' + predictionType + ' span';
+                        $(selector).text(predictionText || "No predictions");
+                    }
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX error:", error);  // Log the AJAX error
+                ['direction_0_predictions', 'direction_1_predictions'].forEach(function(predictionType) {
+                    var selector = '#' + station + '-' + predictionType + ' span';
+                    $(selector).text('Error loading data');
+                });
+            }
+        });
+    }
+
+    // Array of Orange Line stations
+    var stations = [
+        "foresthills", "greenstreet", "stonybrook", "jacksonsquare", "roxburycrossing", "ruggles",
+        "massachusettsavenue", "backbay", "tufts", "chinatown", "downtowncrossing", "state",
+        "haymarket", "northstation", "communitycollege", "sullivansquare", "assembly",
+        "wellington", "maldencenter", "oakgrove"
+    ];
+
+    var line = 'orange'; // Set the line as needed
+
+    stations.forEach(function(station) {
+        updateStationInfo(line, station);
+        setInterval(function() {
+            updateStationInfo(line, station);
+        }, 30000); // Refresh every 30 seconds
+    });
+});
+
+
+
+
+</script>
 </div>
