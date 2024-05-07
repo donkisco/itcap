@@ -84,8 +84,19 @@ for alert in alerts['data']:
     alertstr = alert['attributes']['short_header']
     print(alertstr)
 
+start1 = 0
+start2 = 0
 # Find arrival times for prediction
 # 0 = outbound 1 = inbound
 for prediction in predictions['data']:
-    predictionstr = str(prediction['attributes']['arrival_time']), str(prediction['attributes']['direction_id'])
-    print(predictionstr)
+    predictionnum = str(prediction['attributes']['arrival_time'])
+    predictiondir = str(prediction['attributes']['direction_id'])
+    if predictiondir == "0" and start1 == 0:
+        print(predictionnum, predictiondir)
+        start1 = 1
+    if predictiondir == "1" and start2 == 0:
+        print(predictionnum, predictiondir)
+        start2 = 1
+
+start1 = 0
+start2 = 0

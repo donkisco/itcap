@@ -77,22 +77,83 @@
        
       <h8><a href="#Bottom"class="blueline"><h8>Bottom</h8></a></h8><br><br>
       
-      <!--NORTH/EAST SIDE-->
 
-  
-  <h7>Wonderland:<span id="Bodowin"></span></h7><br>
-  <div class="flex-container_blue">
-    <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-   <div>Bodowin :6 min </div>
-   <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
-  </div>
 
+    <h5><span id="WONDERLAND"></span>WONDERLAND</h5>
+    <h7>Wonderland</h7>
+      <div class="flex-container_blue">
+        <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
+        <div id="wonderland-bowdoin">Bowdoin: loading...</div>
+        <div id="wonderland-governmentcenter">Government-Center: loading...</div>
+      <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
+      </div>
+
+        <!--NORTH/South SIDE-->
+
+    <!-- Script to display the predictions from flask-->    
+    <script>
+      $(document).ready(function() {
+          function updateStationInfo(line, station) {
+              $.ajax({
+                  url: '/station/' + line + '/' + station,
+                  type: 'GET',
+                  dataType: 'json',
+                  success: function(data) {
+                      var wonderlandText = data.wonderland_predictions.map(function(prediction) {
+                          return prediction.departure_time;  // Extract the departure_time for each prediction
+                      }).join(", ");
+                      $('#' + station + '-wonderland').text('wonderland: ' + (wonderlandText || "No predictions"));
+
+                      var bowdoinText = data.bowdion_predictions.map(function(prediction) {
+                          return prediction.departure_time;  // Extract the departure_time for each prediction
+                      }).join(", ");
+                      $('#' + station + '-bowdoin').text('Bowdoin: ' + (bowdoinText || "No predictions"));
+
+                      var governmentcenterText = data.governmentcenter_predictions.map(function(prediction) {
+                          return prediction.departure_time;  // Extract the departure_time for each prediction
+                      }).join(", ");
+                      $('#' + station + '-governmentcenter').text('GovernmentCenter: ' + (governmentcenterText || "No predictions"));
+                  },    
+                  error: function(xhr, status, error) {
+                      $('#' + station + '-wonderland').text('Wonderland: Error loading data');
+                      $('#' + station + '-bowdoin').text('Bowdoin: Error loading data');
+                      $('#' + station + '-governmentcenter').text('GovernmentCenter: Error loading data');
+                  }
+              });
+          }
+
+          var stations = [
+              "wonderland", 
+              "reverebeach", 
+              "beachmont", 
+              "suffolkdowns", 
+              "orientheights", 
+              "woodisland", 
+              "airport", 
+              "maverick", 
+              "aquarium", 
+              "state", 
+              "governmentcenter", 
+              "bowdoin"
+          ];
+
+          var line = 'blue'; 
+
+          stations.forEach(function(station) {
+              updateStationInfo(line, station);
+              setInterval(function() {
+                  updateStationInfo(line, station);
+              }, 30000);
+          });
+      });
+    </script>
     
    <h7>Revere Beach</h7>
    <div class="flex-container_blue">
     <div>Status: <svg width="20" height="20" ><rect width="20" height="20" style="fill:green"/></svg> </div>
-    <div>Wonderland :6 min </div>
-    <div>Bodowin: 2 min </div>
+    <div id="reverebeach-bowdoin">Bowdoin: loading...</div>
+    <div id="reverebeach-governmentcenter">Government-Center: loading...</div>
+    <div id="reverebeach-wonderland">Government-Center: loading...</div>
     <div><input type="checkbox" id="coding" class="save" value="favorites" unchecked /> <label for="favorites"> Favorites</label></div>
   </div>
 
